@@ -7,9 +7,10 @@ namespace Models.Models
         public string UserName { get; set; }
 
 
-        [MinLength(8, ErrorMessage = "Password must be at least 8 characters")]
+        //[MinLength(8, ErrorMessage = "Password must be at least 8 characters")]
 
-        [RegularExpression(@"^(?=(.*\d){2})[A-Za-z\d]{0,}$", ErrorMessage = "The password must contain at least 2 numbers")]
+        //[RegularExpression(@"^(?=(.*\d){2})[A-Za-z\d]{0,}$", ErrorMessage = "The password must contain at least 2 numbers")]
+        [PasswordRequirements]
         public string Password { get; set; }
     }
 }

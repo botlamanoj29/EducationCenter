@@ -10,22 +10,22 @@ public class PasswordRequirementsAttribute : ValidationAttribute
 
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        string validationMessages = string.Empty;
+        var validationMessages = new List<string>();
         if (value != null && value is string password)
         {
             if (password.Length < MinLength)
             {
-                validationMessages.Concat($"Password must be at least {MinLength} characters.");
-                
+                validationMessages.Add($"Password must be at least 8 characters.");
+
             }
 
             if (password.Count(char.IsDigit) < MinNumbers)
             {
-                validationMessages.Concat($"The password must contain at least {MinNumbers} numbers.");
-                
-            }
+                validationMessages.Add($"The password must contain at least 2 numbers.");
 
-            return new ValidationResult(validationMessages);
+            }
+            if (validationMessages.Count > 0)
+                return new ValidationResult(string.Join(" ", validationMessages));
         }
 
         return ValidationResult.Success;
